@@ -11,37 +11,37 @@ public class Solution {
         for (int compressSize = 1; compressSize <= stringLen / 2; compressSize++) {
             answer = new StringBuilder();
             present = 0;
-            while (present <= stringLen - compressSize) {
-                if(present - (compressSize + stringLen) > compressSize){
+            while (present < stringLen) {
+                if(stringLen - present < compressSize){
+                    sub = s.substring(present);
+                    answer.append(sub);
+                    break;
+                }else if(stringLen - present == compressSize){
                     sub = s.substring(present);
                 }
                 else {
                     sub = s.substring(present, present + compressSize);
                 }
-                if (stack.isEmpty()) {
-                    stack.push(sub);
-                } else {
+                if (!stack.isEmpty()) {
                     if (!stack.peek().equals(sub)) {
-                        if (stack.size() == 1) {
-                            answer.append(stack.pop());
-                        } else {
-                            answer.append(stack.size()).append(stack.pop());
-                            stack.clear();
+                        if (stack.size() != 1) {
+                            answer.append(stack.size());
                         }
-                    }
-                    stack.push(sub);
-                    if(present == stringLen - compressSize){
-                        if (stack.size() == 1) {
-                            answer.append(stack.pop());
-                        } else {
-                            answer.append(stack.size()).append(stack.pop());
-                            stack.clear();
+                        stack.clear();
+                    }else {
+                        present+=compressSize;
+                        stack.push(sub);
+                        if(present >= stringLen){
+                            answer.append(stack.size());
                         }
+                        continue;
                     }
                 }
+                stack.push(sub);
+                answer.append(stack.peek());
                 present+=compressSize;
-
             }
+            stack.clear();
             if(answer.length() < shortestLength){
                 shortestLength = answer.length();
             }
