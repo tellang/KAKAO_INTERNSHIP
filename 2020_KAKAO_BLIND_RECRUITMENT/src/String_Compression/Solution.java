@@ -13,6 +13,9 @@ public class Solution {
             present = 0;
             while (present < stringLen) {
                 if (stringLen - present < compressSize) {
+                    if (stack.size() != 1) {
+                        answer.append(stack.size());
+                    }
                     sub = s.substring(present);
                     answer.append(sub);
                     break;
@@ -53,7 +56,7 @@ public class Solution {
 class MainApp {
     public static void main(String[] args) {
         Solution s = new Solution();
-        String str = "abcabcabcabcdededededede";
+        String str = "aaccaaccccccaaccaaccccccccc";
         System.out.println(s.solution(str));
     }
 }
