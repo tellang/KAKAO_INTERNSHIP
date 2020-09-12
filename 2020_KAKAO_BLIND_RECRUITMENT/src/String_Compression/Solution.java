@@ -46,7 +46,7 @@ public class Solution {
             stack.clear();
             if (answer.length() < shortestLength) {
                 shortestLength = answer.length();
-                System.out.println(answer+": "+answer.length()+" compressSize: "+compressSize);
+                //System.out.println(answer+": "+answer.length()+" compressSize: "+compressSize);
             }
         }
         return shortestLength;
